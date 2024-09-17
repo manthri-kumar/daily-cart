@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slider</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      background-color: aqua;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .section {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .slider {
+      width: 800px;
+      height: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .slide {
+      display: flex;
+      width: 400%; /* Each slide is 25% of the container width */
+      height: 100%;
+      transition: margin-left 1s ease-in-out;
+    }
+    .slide input {
+      display: none;
+    }
+    .slide .st {
+      width: 25%; /* 100% / 4 slides */
+      flex: 0 0 auto;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .nav-m, .nav-auto {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-m {
+      bottom: 60px;
+    }
+    .nav-auto {
+      bottom: 10px;
+    }
+    .m-btn, .nav-auto div {
+      border: 2px solid #23e3c2;
+      padding: 5px;
+      border-radius: 10px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .m-btn:not(:last-child) {
+      margin-right: 15px;
+    }
+    .m-btn:hover {
+      background-color: #23e3c2;
+    }
+    .nav-auto div:not(:last-child) {
+      margin-right: 15px;
+    }
+    .nav-auto div.active {
+      background-color: #23e3c2;
+    }
+    /* Slide styles based on radio buttons */
+    #radio1:checked ~ .slide {
+      margin-left: 0;
+    }
+    #radio2:checked ~ .slide {
+      margin-left: -25%;
+    }
+    #radio3:checked ~ .slide {
+      margin-left: -50%;
+    }
+    #radio4:checked ~ .slide {
+      margin-left: -75%;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="slider">
+      <div class="slide">
+        <input type="radio" name="radio-btn" id="radio1" checked>
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <input type="radio" name="radio-btn" id="radio4">
+
+        <div class="st">
+          <img src="c:\Users\manth\OneDrive\Pictures\Screenshots\Screenshot 2024-07-30 173633.png" alt="Slide 1">
+        </div>
+        <div class="st">
+          <img src="c:\Users\manth\OneDrive\Pictures\Screenshots\Screenshot 2024-07-28 090140.png" alt="Slide 2">
+        </div>
+        <div class="st">
+          <img src="c:\Users\manth\OneDrive\Pictures\Screenshots\Screenshot 2024-07-28 090140.png" alt="Slide 3">
+        </div>
+        <div class="st">
+          <img src="c:\Users\manth\OneDrive\Pictures\Screenshots\Screenshot 2024-07-28 090140.png" alt="Slide 4">
+        </div>
+      </div>
+
+      <div class="nav-auto">
+        <div class="a-b1"></div>
+        <div class="a-b2"></div>
+        <div class="a-b3"></div>
+        <div class="a-b4"></div>
+      </div>
+
+      <div class="nav-m">
+        <label for="radio1" class="m-btn"></label>
+        <label for="radio2" class="m-btn"></label>
+        <label for="radio3" class="m-btn"></label>
+        <label for="radio4" class="m-btn"></label>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      let counter = 1;
+      const totalSlides = 4;
+      const intervalTime = 3000; // Time between slides in milliseconds
+
+      function autoSlide() {
+        document.getElementById('radio' + counter).checked = true;
+        counter++;
+        if (counter > totalSlides) {
+          counter = 1;
+        }
+      }
+
+      // Automatic slide change
+      setInterval(autoSlide, intervalTime);
+
+      // Manual slide change
+      const manualButtons = document.querySelectorAll('.nav-m .m-btn');
+      manualButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          document.getElementById('radio' + (index + 1)).checked = true;
+          counter = index + 1; // Update counter to match the clicked button
+        });
+      });
+
+      // Update nav-auto buttons to reflect the active slide
+      function updateNavAuto() {
+        const autoButtons = document.querySelectorAll('.nav-auto div');
+        autoButtons.forEach((button, index) => {
+          if (index + 1 === counter) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+      }
+
+      // Listen for changes in radio buttons to update nav-auto buttons
+      document.querySelectorAll('input[name="radio-btn"]').forEach(radio => {
+        radio.addEventListener('change', updateNavAuto);
+      });
+
+      // Initialize nav-auto buttons on page load
+      updateNavAuto();
+    });
+  </script>
+</body>
+</html>

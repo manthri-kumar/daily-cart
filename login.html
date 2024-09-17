@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-card {
+            border-radius: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background-color: transparent;
+            width: 300px;
+            text-align: center;
+            background-position: ce;
+            margin-bottom: 20px;
+        }
+        .btn-box {
+            width: 220px;
+            margin: 35px auto;
+            position: relative;
+            box-shadow: 0 0 20px 9px #ff61241f;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .toggle-btn {
+            padding: 10px 30px;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            outline: none;
+            position: relative;
+            z-index: 1;
+        }
+        .btn {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 110px;
+            height: 100%;
+            background: linear-gradient(to right, #ff8c00, #000);
+            border-radius: 30px;
+            transition: 0.5s;
+            z-index: 0;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .input-container {
+            position: relative;
+            margin-top: 15px;
+        }
+        input {
+            padding: 10px 10px 10px 40px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 50px;
+            border: 1px solid #ccc;
+        }
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #000;
+        }
+        .signin {
+            margin-top: 20px;
+            padding: 10px;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn:hover {
+            color: #ef5c00;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        #signin {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form class="form-card">
+        <div class="card">
+            <div class="btn-box">
+                <div class="btn" id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="signin()">Sign Up</button>
+            </div>
+            <div id="form-container">
+                <div id="login" class="form-content login">
+                    <label for="fName">First Name</label>
+                    <div class="input-container">
+                        <i class="fa-solid fa-user icon"></i>
+                        <input type="text" id="fName" placeholder="Enter your First Name">
+                    </div>
+                    <label for="Password">Password</label>
+                    <div class="input-container">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <input type="password" id="password" placeholder="Enter your password">
+                        <i class="fa-solid fa-eye eye-icon" id="togglePassword"></i>
+                    </div>
+                    <button type="button" class="signin"><a href="DailyCart.html">LogIn</a></button>
+                </div>
+                <div id="signin" class="form-content signup">
+                    <label for="fName">First Name</label>
+                    <div class="input-container">
+                        <i class="fa-solid fa-user icon"></i>
+                        <input type="text" id="fName" placeholder="Enter your First Name">
+                    </div>
+                    <label for="email">E-mail</label>
+                    <div class="input-container">
+                        <i class="fa-solid fa-envelope icon"></i>
+                        <input type="email" id="email" placeholder="Enter your E-mail">
+                    </div>
+                    <label for="Password">Password</label>
+                    <div class="input-container">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <input type="password" id="password" placeholder="Enter your password">
+                    </div>
+                    <input type="checkbox" id="checkbox"><span>I agree to the terms & conditions</span>
+                    <button type="button" class="signin"><a href="DailyCart.html">SignIn</a></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        var x = document.getElementById('login');
+        var y = document.getElementById('signin');
+        var z = document.getElementById('btn');
+
+        function signin() {
+            x.style.display = 'none';
+            y.style.display = 'block';
+            z.style.left = '110px';
+        }
+
+        function login() {
+            x.style.display = 'block';
+            y.style.display = 'none';
+            z.style.left = '0px';
+        }
+
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>
